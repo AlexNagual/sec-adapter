@@ -1,0 +1,11 @@
+server:
+  port: 8081
+
+logger:
+  name: ${rootProject.name}
+  version: ${version}
+  level: DEBUG
+
+spring:
+  banner:
+    location: banner

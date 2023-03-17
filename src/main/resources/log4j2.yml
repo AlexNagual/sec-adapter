@@ -1,0 +1,32 @@
+Configuration:
+  status: error
+  name: LoggerYamlConfiguration
+  Appenders:
+    Console:
+      name: ConsoleAppender
+      PatternLayout:
+        Pattern: "%d %-5p [%c{1}:%L] %m%n"
+        Charset: "UTF-8"
+      Filters:
+        ThresholdFilter:
+          level: INFO
+    RollingFile:
+      name: RollingFileAppender
+      append: true
+      fileName: "/log/sec-adapter.log"
+      filePattern: "/log/sec-adapter-%i.log.gz"
+      JsonTemplateLayout:
+        eventTemplateUri: "classpath:JsonLayout.json"
+        maxStringLength: 10000
+        locationInfoEnabled: true
+      Policies:
+        SizeBasedTriggeringPolicy:
+          size: "200MB"
+      DefaultRolloverStrategy:
+        max: 10
+  Loggers:
+    Root:
+      level: ${spring:logger.level}
+      includeLocation: true
+      AppenderRef:
+        ref: ConsoleAppender
